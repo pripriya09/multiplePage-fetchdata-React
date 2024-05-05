@@ -5,6 +5,8 @@ function Main() {
 const [post,setPost] =useState([])
 const [pagenumber,setPagenumber]=useState(1)
 const perpage= 10
+// const [perpage,setPerpage]= useState(10)
+
 
 
 useEffect(() => {
@@ -18,18 +20,24 @@ useEffect(() => {
 
 // useEffect(() => {
 //     setPerpage(Math.floor(post,length/perpage))
-// }, [post])\
+// }, [post])
 
 
 const totalpage =Math.floor(post.length/perpage);
 
 
 function handlePrevious(){
-  setPagenumber(pagenumber -1)
+  if(pagenumber>1){
+    setPagenumber(pagenumber -1)
+  }
+  
 };
 
 function handleNext(){
-  setPagenumber(pagenumber +1)
+  if(pagenumber<10){
+    setPagenumber(pagenumber +1)
+  }
+  
 }
 
 const  firstpage = (pagenumber - 1)*perpage
@@ -49,9 +57,10 @@ const lastpage =pagenumber*perpage
         )
      }
     )}
-    <button onClick={handlePrevious} style={{visibility:pagenumber === 1 ? 'visible' : 'hidden'}} >Pre</button>
-     <p>{pagenumber}</p>
-  <button onClick={handleNext} style={{visibility:pagenumber === totalpage ? 'hidden' : 'visible'}}>Next</button>
+    <button onClick={handlePrevious}  >Pre</button>
+
+           <span>{pagenumber}/{totalpage}</span>
+  <button onClick={handleNext}>Next</button>
      
 
       
